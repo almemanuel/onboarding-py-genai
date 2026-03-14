@@ -1,10 +1,13 @@
-from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+import os
 
-llm = ChatOpenAI(
-    model="deepseek-chat",
-    api_key="sua-chave-aqui",
-    base_url="https://api.deepseek.com"
+load_dotenv()
+
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    api_key=os.getenv("GROQ_API_KEY")
 )
 
-resposta = llm.invoke("O que é um agente de IA?")
-print(resposta.content)
+res = llm.invoke("O que é um agente de IA?")
+print(res.content)
